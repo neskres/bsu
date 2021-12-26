@@ -27,6 +27,19 @@ public class ExpediaFlightsPageSearchFormTest extends CommonConditions {
     }
 
     @Test
+    public void sameFromAndToFieldsFlightsPageTest() {
+        Location testLocations = LocationsCreator.sameLocationsFromProperty();
+        ExpediaHomePage homePage = new ExpediaHomePage(driver);
+
+        ExpediaFlightsPage flightsPage = homePage.openFlightsPage()
+                                                 .enterSameLocations(testLocations.getFromLocation());
+
+        flightsPage.searchFlights();
+
+        Assert.assertTrue(flightsPage.isSameLocationsExceptionVisible());
+    }
+
+    @Test
     public void maxNumberOfFlightFormsFlightsPageTest() {
         ExpediaHomePage homePage = new ExpediaHomePage(driver);
         ExpediaFlightsPage flightsPage = homePage.openFlightsPage();

@@ -26,6 +26,10 @@ public class ExpediaFlightsPage extends AbstractPage{
 
     private By swapButtonLocator = By.xpath("//button[@aria-label='Swap origin and destination']");
 
+    private By sameLocationsExceptionLocator = By.xpath("//div[contains(text(),'different destination from origin')]");
+
+    private By searchButtonLocator = By.xpath("//button[text()='Search']");
+
     protected ExpediaFlightsPage(WebDriver driver) {
         super(driver);
     }
@@ -57,12 +61,14 @@ public class ExpediaFlightsPage extends AbstractPage{
     public ExpediaFlightsPage enterFromLocation(String fromLocation) {
         findElementByLocatorAndClick(fromLocationButtonLocator);
         findElementByLocatorAndClick(fromLocationInputLocator).sendKeys(fromLocation + Keys.ENTER);
+        LOGGER.log(Level.INFO, "From location [{}] is entered", fromLocation);
         return this;
     }
 
     public ExpediaFlightsPage enterToLocation(String toLocation) {
         findElementByLocatorAndClick(toLocationButtonLocator);
         findElementByLocatorAndClick(toLocationInputLocator).sendKeys(toLocation + Keys.ENTER);
+        LOGGER.log(Level.INFO, "To location [{}] is entered", toLocation);
         return this;
     }
 
@@ -77,5 +83,27 @@ public class ExpediaFlightsPage extends AbstractPage{
         findElementByLocatorAndClick(swapButtonLocator);
         LOGGER.log(Level.INFO, "From location and to location are swapped");
         return this;
+    }
+
+    public ExpediaFlightsPage enterSameLocations(String sameLocation) {
+        enterFromLocation(sameLocation);
+        enterToLocation(sameLocation);
+        return this;
+    }
+
+    public ExpediaFlightsResultsPage searchFlights() {
+        LOGGER.log(Level.INFO, "Searching...");
+        findElementByLocatorAndClick(searchButtonLocator);
+        return new ExpediaFlightsResultsPage(driver);
+    }
+
+    public boolean isSameLocationsExceptionVisible() {
+        boolean isVisible = findElementByLocator(sameLocationsExceptionLocator).isDisplayed();
+        if (isVisible) {
+            LOGGER.log(Level.INFO, "Same locations exception is visible");
+        } else {
+            LOGGER.log(Level.ERROR, "Same locations exception is not visible");
+        }
+        return isVisible;
     }
 }

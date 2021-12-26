@@ -12,4 +12,10 @@ public class LocationsCreator {
                             TestDataReader.getTestData(TESTDATA_TO_LOCATION),
                             TestDataReader.getTestData(TESTDATA_PICKUP_LOCATION));
     }
+
+    public static Location sameLocationsFromProperty() {
+        return new Location(TestDataReader.getTestData(TESTDATA_FROM_LOCATION),
+                TestDataReader.getTestData(TESTDATA_FROM_LOCATION),
+                TestDataReader.getTestData(TESTDATA_PICKUP_LOCATION));
+    }
 }
