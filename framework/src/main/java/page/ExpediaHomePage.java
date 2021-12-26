@@ -14,9 +14,9 @@ public class ExpediaHomePage extends AbstractPage {
     private static final String CARS_PAGE_URL = "https://www.expedia.com/Cars";
     private static final String FLIGHTS_PAGE_URL = "https://www.expedia.com/Flights";
 
-    private By discardAdvertisementLocator = By.xpath("//div[contains(@class,'site-header')]");
+    private By discardLoginLocator = By.xpath("//div[contains(@class,'site-header')]");
 
-    private By destinationExceptionLocator = By.xpath("//h3[@class='uitk-error-summary-heading']");
+    private By destinationExceptionLocator = By.xpath("//div[contains(@class,'message-error')]");
 
     private By roomFormLocator = By.xpath("//a[@data-testid='travelers-field']");
 
@@ -33,8 +33,22 @@ public class ExpediaHomePage extends AbstractPage {
     public ExpediaHomePage openHomePage() {
         driver.get(HOMEPAGE_URL);
         LOGGER.log(Level.INFO, "Home page is opened");
-        findElementByLocatorAndClick(discardAdvertisementLocator);
+        findElementByLocatorAndClick(discardLoginLocator);
         return this;
+    }
+
+    public ExpediaCarsPage openCarsPage() {
+        driver.get(CARS_PAGE_URL);
+        LOGGER.log(Level.INFO, "Cars page is opened");
+        findElementByLocatorAndClick(discardLoginLocator);
+        return new ExpediaCarsPage(driver);
+    }
+
+    public ExpediaFlightsPage openFlightsPage() {
+        driver.get(FLIGHTS_PAGE_URL);
+        LOGGER.log(Level.INFO, "Flights page is opened");
+        findElementByLocatorAndClick(discardLoginLocator);
+        return new ExpediaFlightsPage(driver);
     }
 
     public ExpediaStaysResultsPage searchHotels() {

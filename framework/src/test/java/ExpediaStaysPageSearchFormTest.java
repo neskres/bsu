@@ -4,7 +4,7 @@ import page.ExpediaHomePage;
 import util.CommonConditions;
 
 public class ExpediaStaysPageSearchFormTest extends CommonConditions {
-    private static final String DESTINATION_EXCEPTION_TEXT = "To continue, please correct the error below.";
+    private static final String DESTINATION_EXCEPTION_TEXT = "Please select a destination";
     private static final int MAX_NUMBER_OF_ADULTS = 14;
 
     @Test

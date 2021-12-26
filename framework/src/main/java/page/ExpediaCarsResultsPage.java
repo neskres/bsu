@@ -6,4 +6,8 @@ public class ExpediaCarsResultsPage extends AbstractPage{
     protected ExpediaCarsResultsPage(WebDriver driver) {
         super(driver);
     }
+
+    public boolean isInitialized(String location) {
+        return driver.getCurrentUrl().contains(location);
+    }
 }
