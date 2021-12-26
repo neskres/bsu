@@ -30,6 +30,6 @@ public class ExpediaCarsPageSearchFormTest extends CommonConditions {
                                                      .enterLocation(testLocation.getPickupLocation())
                                                      .searchCars();
 
-        Assert.assertTrue(false);
+        Assert.assertTrue(resultsPage.isInitialized());
     }
 }
